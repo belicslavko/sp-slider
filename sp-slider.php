@@ -75,8 +75,8 @@ function sp_slider_db_uninstall()
 {
     global $wpdb;
 
-    $wpdb->query("DROP TABLE IF EXISTS " . $table_name);
-    $wpdb->query("DROP TABLE IF EXISTS " . $table_post);
+    $wpdb->query("DROP TABLE IF EXISTS " . 'sp_slider');
+    $wpdb->query("DROP TABLE IF EXISTS " . 'sp_slider_posts');
 
 }
 
@@ -89,4 +89,49 @@ add_action('admin_head', 'sp_slider_css');
 function sp_slider_css()
 {
     echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('sp-slider/css/style.css') . '">';
+}
+
+/**
+ *  Add to admin menu
+ */
+
+add_action('admin_menu', 'sp_slider_page');
+
+function sp_slider_page()
+{
+    add_menu_page('Post Slider', 'Post Slider', 'manage_options', 'sp-slider', 'sp_slider_index', 'dashicons-images-alt');
+
+}
+
+/**
+ *  Index page
+ */
+
+function sp_slider_index()
+{
+    global $wpdb;
+    $slider = $wpdb->get_results( "SELECT * FROM " . $wpdb->prefix . "sp_slider" );
+    ?>
+
+    <form class='nbs-plugin' action='admin.php?page=sp-slider' method='POST'>
+
+        <h1><?php echo __( 'Simple Post Slider', 'sp-slider' ); ?></h1>
+
+        <fieldset class='field-sp-slider-top'>
+            <legend ><?php echo __( 'List slider', 'sp-slider' ); ?></legend>
+
+            <ul>
+                <?php foreach($slider as $s){ ?>
+
+                    <li><a href="admin.php?page=sp-slider&edit-slider=<?php echo $s->id; ?>"><?php echo $s->name; ?> | [sp-post-slider id='<?php echo $s->id; ?>']</a></li>
+
+                <?php } ?>
+            </ul>
+
+        </fieldset>
+
+    </form>
+
+
+<?php
 }
