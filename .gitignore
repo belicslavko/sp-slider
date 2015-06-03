@@ -49,3 +49,4 @@ Temporary Items
 .idea/workspace.xml
 .idea/sp-slider.iml
 .idea/misc.xml
+*.php~
