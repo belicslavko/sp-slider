@@ -55,7 +55,12 @@ function sp_slider_db_install()
     id int(11) NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     time int(11) NOT NULL,
+<<<<<<< Updated upstream
     post_type varchar(255) NOT NULL,    
+=======
+    post_type varchar(255) NOT NULL,
+    wrap int(11) NOT NULL,
+>>>>>>> Stashed changes
     PRIMARY KEY (id)
     ) $charset_collate";
 
@@ -138,42 +143,70 @@ function sp_slider_index()
 {
     
     // index page view
+<<<<<<< Updated upstream
     if(empty($_GET['sp-slider-route']) && empty($_POST['sp-slider-route'])){
+=======
+    if(!empty($_GET['route']) && !empty($_POST['route'])){
+>>>>>>> Stashed changes
         
         sp_slider_list();
         
     }
     
     // edit slide page view
+<<<<<<< Updated upstream
     if($_GET['sp-slider-route'] === 'edit'){
+=======
+    if($_GET['route'] === 'edit'){
+>>>>>>> Stashed changes
     
         sp_slider_edit($_GET['slide-id']);
     
     }
     
     // create slide page view
+<<<<<<< Updated upstream
     if($_GET['sp-slider-route'] === 'create'){
+=======
+    if($_GET['route'] === 'create'){
+>>>>>>> Stashed changes
     
         sp_slider_create();
     
     }
     
     // edit slider
+<<<<<<< Updated upstream
     if($_POST['sp-slider-route'] === 'edit'){
     
         sp_slider_edit_post($_POST['slide-id']);
+=======
+    if($_POST['route'] === 'edit'){
+    
+        sp_slider_edit($_POST['slide-id']);
+>>>>>>> Stashed changes
     
     }
     
     // create slider
+<<<<<<< Updated upstream
     if($_POST['sp-slider-route'] === 'create'){
     
         sp_slider_create_post();
+=======
+    if($_POST['route'] === 'create'){
+    
+        sp_slider_create();
+>>>>>>> Stashed changes
     
     }
     
     // del slider
+<<<<<<< Updated upstream
     if($_GET['sp-slider-route'] === 'del'){
+=======
+    if($_GET['route'] === 'del'){
+>>>>>>> Stashed changes
     
         sp_slider_del($_GET['slide-id']);
     
@@ -200,6 +233,7 @@ function sp_slider_list()
         <fieldset class='field-sp-slider-top mtop width50'>
             <legend ><?php echo __( 'List slider', 'sp-slider' ); ?></legend>
             
+<<<<<<< Updated upstream
 		<form action="admin.php?page=sp-slider&sp-slider-route=create" method="GET">
 			
 			<input type="hidden" name="page" value="sp-slider">
@@ -237,6 +271,24 @@ function sp_slider_list()
                             Del
                         </a>
                     </li>
+=======
+            <section>
+                <?php $post_types = get_post_types( '', 'names' ); 
+
+                    foreach ( $post_types as $post_type ) {
+
+                        echo '<option value="">' . $post_type . '</option>';
+                    }
+                    ?>
+                
+            </section>
+            <a href="admin.php?page=sp-slider&route=create">New Slider +</a>
+
+            <ul>
+                <?php foreach($slider as $s){ ?>
+
+                    <li><?php echo $s->name; ?> | [sp-post-slider id='<?php echo $s->id; ?>'] <a href="admin.php?page=sp-slider&edit-slider=<?php echo $s->id; ?>">Edit</a></li>
+>>>>>>> Stashed changes
 
                 <?php } ?>
             </ul>
@@ -254,6 +306,7 @@ function sp_slider_list()
  *  Create slider view
  */
 
+<<<<<<< Updated upstream
  function sp_slider_create()
  {
     $post_type = $_GET['post_type'];
@@ -432,6 +485,9 @@ function sp_slider_list()
     }
     
    redirect_js('admin.php?page=sp-slider');die('Loading...');
+=======
+ function sp_slider_create(){
+>>>>>>> Stashed changes
     
  }
 
@@ -439,6 +495,7 @@ function sp_slider_list()
  *  Edit slider view
  */
 
+<<<<<<< Updated upstream
  function sp_slider_edit()
  {
     global $wpdb;
@@ -631,3 +688,9 @@ function sp_slider_list()
     redirect_js('admin.php?page=sp-slider');die('Loading...');
     
  }
+=======
+ function sp_slider_edit(){
+    
+    
+ }
+>>>>>>> Stashed changes
